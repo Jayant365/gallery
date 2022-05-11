@@ -1,0 +1,53 @@
+<div class="container">
+  <%= form_with model: album do |form| %>
+    <br>
+    <div class="mb-3">
+      <%= form.label :Title, class:"form-label"%><br>
+      <%= form.text_field :title, class:"form-control",placeholder: "Enter title"%>
+      <% album.errors.full_messages_for(:title).each do |message| %>
+        <div class="text-danger"><%= message %></div>
+      <% end %>
+    </div>
+    <br>
+
+    <div class="mb-3">
+      <%= form.label :Description , class:"form-label"%><br>
+      <%= form.text_field :description, class:"form-control",placeholder: "Enter description"%>
+      <% album.errors.full_messages_for(:description).each do |message| %>
+      <div class="text-danger"><%= message %></div>
+      <% end %>
+    </div>
+    <br>
+
+    <div class="mb-3">
+      <%= form.label :Tags , class:"form-label"%><br>
+      <%= form.text_field :tagged, class:"form-control",placeholder: "Enter tags seperated by comma(,)"%>
+      <% album.errors.full_messages_for(:tagged).each do |message| %>
+        <div class="text-danger"><%= message %></div>
+      <% end %>
+    </div><br>
+    
+    <div class="mb-3">
+      <%= form.label :Album_Images, class:"form-label"%><br>
+      <%= form.file_field :images, class:"form-control", multiple: true%>
+    </div><br>
+
+    <div class="mb-3">
+      <%= form.label :Cover_Image, class:"form-label"%><br>
+      <%= form.file_field :cover_image, class:"form-control"%>
+      <% album.errors.full_messages_for(:cover_image).each do |message| %>
+        <div class="text-danger"><%= message %></div>
+      <% end %>
+    </div><br>
+
+    <div class="mb-3">
+      <%= form.label :Publish, class: "form-label"%>
+      <%= form.check_box :publish%>
+    </div>
+    <br>
+    
+    <div class="btn btn-primary">
+      <%= form.submit %>
+    </div>
+  <% end %> 
+</div>

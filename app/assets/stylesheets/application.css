@@ -1,0 +1,60 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+.image-card {
+    width: 21.5rem;
+    float: left;
+    margin: 40px;
+    background-color: #95c1d5;
+}
+
+.image-set {
+    margin: 20px;
+    float: left;
+    width: 300px;
+}
+
+.home-card {
+    width: 21rem;
+    height:  43rem;
+    float: left;
+    margin: 40px;
+}
+
+.cover-image {
+    width: 90%;
+    height: 230px;
+    margin-left:17px;
+}
+
+.box {
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    float: right;
+}
+
+.show-image-card {
+    width: 100%;
+    height: 230px;
+}
+
+.card-show {
+    padding: 8px;
+    text-align: center;
+    font-size: 1em
+}

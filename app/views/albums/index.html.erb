@@ -1,0 +1,58 @@
+<div class="container my-5">
+  <div style="background-color: lightgrey;">
+    <hr>
+    <h1 class="ms-5 float-start">HERE YOU CAN VIEW AND EDIT ALBUM</h1>
+    <div class="search mt-4 text-end me-5">
+      <%= search_form_for @q, url: albums_path do |f|%>
+        <%= f.search_field :tags_name_eq , placeholder: "Search By Tag", class:"rounded"%>
+        <%= f.submit "Search", class:"rounded" %><br>
+      <% end %>
+    </div><br>
+    <hr>
+  </div>
+  <% @albums.each do |album| %>
+    <div class="card home-card">
+      <h3 class="card-header text-center">
+        <strong>Album:</strong>
+        <%= album.title %>
+      </h3>
+      <br>
+      <% if album.cover_image.attached? %>
+        <%= link_to image_tag(album.cover_image , class:"cover-image"), album.cover_image, target: "_blank"%>
+      <% end %>  
+      <div class="card-body">
+        <p><hr>
+          <strong>Description :</strong>
+          <span class="card-text"><%= album.description%></span>
+        </p>
+        <p>
+          <strong>Created at: </strong>
+          <span class="text-muted"><%= album.created_at%></span>
+        </p>
+        <p > 
+          <strong>Updated at: </strong>
+          <span class="text-muted"><%= album.updated_at%></span>
+        </p>
+        <p> 
+            <strong>Tags: </strong>
+            <span class="text-muted"><%= album.tagged%></span>
+          </p>
+        <p > 
+          <strong>Total Images: </strong>
+          <span class="text-muted"><%= album.images.count%></span>
+        </p><hr>
+        <div class="text-center">
+          <a href="<%= edit_album_path(album)%>" class="btn btn-primary float-start">Edit Album</a>
+            <%= button_to "Destroy Album", album_path(album),method: :delete, data: {turbo_method: :destroy}, class: "btn btn-danger" %>
+            <br>
+          <a href="<%= album_path(album)%>" class="btn btn-primary">Go to this album</a>
+          <% if album.publish? %>
+            <div class='bg-success mt-4 rounded box'></div>
+          <% else %>
+            <div class='bg-danger mt-4 rounded box'></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

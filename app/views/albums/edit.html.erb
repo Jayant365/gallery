@@ -1,0 +1,9 @@
+<div class="container">
+	<h1 class="text-center">HERE YOU EDIT OUR ALBUM</h1>
+	<%= render "form",album: @album %>
+	<br>
+	<div>
+		<%= link_to "Show this album", album_path(@album) %> |
+		<%= link_to "Back to albums", :back %>
+	</div>
+</div>

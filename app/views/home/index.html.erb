@@ -1,0 +1,49 @@
+<div class="container my-5">
+  <div style="background-color: lightgrey;"> 
+    <hr> 
+    <h1 class="ms-4" style="float: left;">HERE YOU CAN VIEW ALL PUBLISHED ALBUMS</h1>
+    <div class="search mt-4 d-flex justify-content-end me-3">
+      <%= search_form_for @q, url: root_path do |f|%>
+        <%= f.search_field :tags_name_eq , placeholder: "Search By Tag", class:"rounded"%>
+        <%= f.submit "Search", class:"rounded" %>
+      <% end %>
+    </div><br>
+    <hr>
+  </div>
+  <% @albums.each do |image| %>
+    <div class="container">
+      <div class="card" style="width: 21rem; height: 35rem; float: left; margin: 40px;">
+        <h3 class="card-header text-center" style="background-color: #FF9933;">
+          <strong>Album:</strong>
+          <%= image.title%>
+        </h3><br>
+        <% if image.cover_image.attached? %>
+          <%= link_to image_tag(image.cover_image , style: "width: 90%;height: 230px; margin-left:17px;"), image.cover_image, target: "_blank"%>
+        <% end %>
+        <div class="card-body">
+          <hr> 
+          <p>
+            <strong>Description :</strong>
+            <span class="card-text"><%= image.description%></span>
+          </p>
+          <p>
+            <strong>Created at: </strong>
+            <span class="text-muted"><%= image.created_at%></span>
+          </p>
+          <p> 
+            <strong>Updated at: </strong>
+            <span class="text-muted"><%= image.updated_at%></span>
+          </p>
+          <p> 
+            <strong>Tags: </strong>
+            <span class="text-muted"><%= image.tagged%></span>
+          </p>
+          <p> 
+            <strong>Total Images: </strong>
+            <span class="text-muted"><%= image.images.count%></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

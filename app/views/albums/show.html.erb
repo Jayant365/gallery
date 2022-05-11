@@ -1,0 +1,51 @@
+<div class="my-5 text-center">
+  <h2><strong>Title : </strong><%= @album.title%></h2>
+  <p><strong>Description : </strong><%= @album.description %></p>
+  <%= link_to 'Edit Album', edit_album_path(@album) %> |
+  <%= link_to 'Back to Main', albums_path %>
+</div>
+<hr>
+
+<div class="container my-5">
+  <% @album.images.order("created_at DESC").each do |album| %>
+  <div class="card image-card" >
+    <div class="image-set">
+        <%= link_to image_tag(album , class:"show-image-card"), album, target: "_blank"%>
+      <div class="card-show">
+        <strong><%= number_to_human_size(album.byte_size.to_i) %></strong><br><br>
+        <%= link_to "Download", album, target: "_blank", class: "btn btn-success float-start"%>
+        <%= button_to "Delete", purge_image_path(album_id: @album.id, attachment_id: album.id), method: :delete ,data: { turbo_confirm: "Are you sure?"}, class:"btn btn-danger float-end"%>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add Images
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with model: @album do |form| %>
+          <div class="field">
+            <%= form.file_field :images, :multiple =>true, class: "form-control" %>
+          </div>
+          <br />
+          <div>
+            <%= form.submit "Add Images", class: "btn btn-primary" %>
+          </div>
+          <% end %>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

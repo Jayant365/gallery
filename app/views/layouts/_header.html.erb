@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="container">
+    <a class="navbar-brand text-primary ms-5" href="<%= root_path %>">Gallery App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-light" aria-current="page" href="<%= root_path %>">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="<%= albums_path %>">My Album</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="<%= new_album_path %>">New Album</a>
+        </li>
+      </ul>
+      <% if !user_signed_in? %>
+        <span class="me-5">
+          <a class="btn btn-primary" href="<%= user_session_path %>" tabindex="-1" aria-disabled="true">Sign In</a>
+        </span>
+      <% end %>
+      <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown">
+            <%= current_user.email %>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to edit_user_registration_path, class: "dropdown-item #{'active fw-bold' if current_page?(edit_user_registration_path)}" do %>
+              <div class="fa fa-cog"></div>
+              <b>Account settings</b>
+            <% end %>
+            <%= button_to destroy_user_session_path,method: :delete ,  class: "dropdown-item" do %>
+              <div class="fa fa-sign-out-alt"></div>
+              <b>Sign out</b>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </div>
+  </div>
+</nav>
